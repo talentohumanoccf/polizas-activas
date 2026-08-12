@@ -68,8 +68,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.25rem 2rem;
-            background: rgba(15, 23, 42, 0.9);
+            padding: 1rem 2rem;
+            background: rgba(15, 23, 42, 0.92);
             backdrop-filter: blur(14px);
             border-bottom: 1px solid var(--glass-border);
             position: sticky;
@@ -80,22 +80,15 @@
         .brand {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 14px;
             font-weight: 800;
             font-size: 1.3rem;
         }
 
-        .brand-icon {
-            width: 44px;
-            height: 44px;
-            background: linear-gradient(135deg, #0284c7, #10b981);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.4rem;
-            color: white;
-            box-shadow: 0 4px 14px rgba(2, 132, 199, 0.5);
+        .brand-logo-img {
+            height: 46px;
+            object-fit: contain;
+            filter: drop-shadow(0 2px 8px rgba(0,0,0,0.2));
         }
 
         .nav-tabs {
@@ -257,9 +250,19 @@
 
         .demo-pill:hover { background: rgba(255, 255, 255, 0.22); }
 
+        .insurers-section-title {
+            font-size: 1.4rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
         .insurers-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
             gap: 1.5rem;
             margin-bottom: 2rem;
         }
@@ -272,10 +275,20 @@
             padding: 1.75rem;
             position: relative;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
-        .insurer-card.zurich { border-top: 4px solid var(--zurich-blue); }
-        .insurer-card.hdi { border-top: 4px solid var(--hdi-green); }
+        .insurer-card.zurich { border-top: 5px solid var(--zurich-blue); }
+        .insurer-card.hdi { border-top: 5px solid var(--hdi-green); }
+
+        .insurer-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
 
         .insurer-badge {
             font-size: 0.75rem;
@@ -284,8 +297,6 @@
             letter-spacing: 0.5px;
             padding: 4px 12px;
             border-radius: 20px;
-            display: inline-block;
-            margin-bottom: 0.75rem;
         }
 
         .badge-zurich {
@@ -300,22 +311,65 @@
             border: 1px solid rgba(74, 222, 128, 0.3);
         }
 
-        .insurer-title { font-size: 1.25rem; font-weight: 800; margin-bottom: 0.5rem; }
-        .insurer-desc { font-size: 0.9rem; color: #cbd5e1; line-height: 1.5; margin-bottom: 1.25rem; }
+        .insurer-title { font-size: 1.35rem; font-weight: 800; color: #ffffff; }
+        .insurer-subtitle-target {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #38bdf8;
+            margin-bottom: 0.75rem;
+        }
+
+        .insurer-steps {
+            background: rgba(15, 23, 42, 0.5);
+            border-radius: var(--radius-md);
+            padding: 1rem 1.25rem;
+            margin-bottom: 1.25rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .insurer-steps h5 {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #cbd5e1;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .insurer-steps ul {
+            padding-left: 1.2rem;
+            font-size: 0.88rem;
+            color: #e2e8f0;
+            line-height: 1.5;
+        }
+
+        .insurer-steps li { margin-bottom: 6px; }
+        .insurer-steps strong { color: #ffffff; }
+
+        .insurer-notice {
+            background: rgba(245, 158, 11, 0.15);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            border-radius: 8px;
+            padding: 10px;
+            font-size: 0.82rem;
+            color: #fef08a;
+            margin-bottom: 1.25rem;
+            line-height: 1.4;
+        }
 
         .insurer-btn {
             width: 100%;
-            padding: 10px;
-            border-radius: 8px;
+            padding: 12px;
+            border-radius: 10px;
             border: none;
             font-weight: 700;
-            font-size: 0.88rem;
+            font-size: 0.9rem;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
-            transition: opacity 0.2s;
+            transition: transform 0.2s;
         }
 
         .btn-zurich { background: var(--zurich-blue); color: white; }
@@ -334,13 +388,16 @@
         .brand-pdf-header {
             display: flex;
             align-items: center;
-            gap: 12px;
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 1px solid #f1f5f9;
+            gap: 16px;
+            margin-bottom: 1.25rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid #e2e8f0;
         }
 
-        .brand-pdf-logo { font-size: 1.4rem; font-weight: 800; color: #0284c7; }
+        .brand-pdf-logo-img {
+            height: 50px;
+            object-fit: contain;
+        }
 
         .result-header {
             display: flex;
@@ -642,15 +699,13 @@
     <!-- Aclaración de Rumor sobre Plazo de 3 Días -->
     <div class="clarification-bar">
         <i class="fa-solid fa-triangle-exclamation" style="font-size: 1.1rem;"></i>
-        <span><strong>ACLARACIÓN IMPORTANTE:</strong> Es FALSO que exista un plazo límite de 3 días para reportar el siniestro. Recomendamos hacer la reclamación en línea a la mayor brevedad para agilizar la inspección.</span>
+        <span><strong>ACLARACIÓN IMPORTANTE:</strong> Es FALSO el rumor del plazo de 3 días para reportar el siniestro. No obstante, te sugerimos radicar en línea a la mayor brevedad posible para agilizar la inspección.</span>
     </div>
 
-    <!-- Navbar -->
+    <!-- Navbar con Logo Oficial -->
     <nav class="navbar">
         <div class="brand">
-            <div class="brand-icon">
-                <i class="fa-solid fa-hands-holding-child"></i>
-            </div>
+            <img src="https://i.imgur.com/yyI6FWO.png" alt="Comfamiliar Risaralda" class="brand-logo-img">
             <span>Comfamiliar Risaralda</span>
         </div>
         <div class="nav-tabs">
@@ -671,34 +726,87 @@
         <!-- VISTA 1: PORTAL DE CONSULTA Y REGISTRO DE RADICADO -->
         <section id="view-portal" class="view-section active">
 
-            <!-- Tarjetas Informativas de Aseguradoras (Zurich vs HDI) -->
+            <!-- INSTRUCCIONES ESPECÍFICAS DE REPORTE SEGÚN EL CORREO OFICIAL -->
+            <div class="insurers-section-title">
+                <i class="fa-solid fa-clipboard-list" style="color: #38bdf8;"></i>
+                <span>Procedimiento de Reporte de Siniestros por Aseguradora</span>
+            </div>
+
             <div class="insurers-grid">
+                <!-- ZURICH CARD -->
                 <div class="insurer-card zurich">
-                    <span class="insurer-badge badge-zurich">Póliza Colectiva Empleados</span>
-                    <h3 class="insurer-title">Aseguradora ZURICH</h3>
-                    <p class="insurer-desc">Corresponde a la <strong>Póliza Colectiva de Incendio y Terremoto para Empleados de Comfamiliar Risaralda</strong>. Realiza tu reporte en la línea oficial de Zurich.</p>
-                    <button class="insurer-btn btn-zurich" onclick="window.open('https://www.zurich.com.co', '_blank')">
-                        <i class="fa-solid fa-arrow-up-right-from-square"></i> Reportar Siniestro en Zurich
-                    </button>
+                    <div>
+                        <div class="insurer-header-row">
+                            <span class="insurer-badge badge-zurich">Póliza Colectiva</span>
+                            <i class="fa-solid fa-shield-halved" style="color: #60a5fa; font-size: 1.2rem;"></i>
+                        </div>
+                        <h3 class="insurer-title">Aseguradora ZURICH</h3>
+                        <div class="insurer-subtitle-target">
+                            <i class="fa-solid fa-user-tie"></i> Aplica para: Empleados de Comfamiliar Risaralda
+                        </div>
+                        
+                        <div class="insurer-steps">
+                            <h5>Pasos para realizar el reporte:</h5>
+                            <ul>
+                                <li>Corresponde a la <strong>Póliza Colectiva de Incendio y Terremoto</strong> para empleados de Comfamiliar.</li>
+                                <li>Realiza tu reclamación en la plataforma en línea de <strong>Zurich Seguros</strong> o línea #888.</li>
+                                <li>Al finalizar, la aseguradora te entregará un <strong>Número de Radicado</strong>.</li>
+                                <li><strong>¡Indispensable!</strong> Ingresa ese número de radicado en el formulario de abajo para que el área de <strong>Desarrollo Estratégico</strong> realice la trazabilidad y seguimiento de tu caso.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="insurer-notice">
+                            <i class="fa-solid fa-circle-info"></i> Recordatorio: Tras hacer tu reporte en Zurich, registra tu radicado aquí abajo para el seguimiento.
+                        </div>
+                        <button class="insurer-btn btn-zurich" onclick="window.open('https://www.zurich.com.co', '_blank')">
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i> Realizar Reporte en Zurich
+                        </button>
+                    </div>
                 </div>
 
+                <!-- HDI CARD -->
                 <div class="insurer-card hdi">
-                    <span class="insurer-badge badge-hdi">Póliza de Crédito</span>
-                    <h3 class="insurer-title">Aseguradora HDI</h3>
-                    <p class="insurer-desc">Corresponde a las <strong>Pólizas de Incendio y Terremoto vinculadas a Crédito</strong>. Realiza el reporte directamente en el portal de HDI Seguros.</p>
-                    <button class="insurer-btn btn-hdi" onclick="window.open('https://www.hdi.com.co', '_blank')">
-                        <i class="fa-solid fa-arrow-up-right-from-square"></i> Reportar Siniestro en HDI
-                    </button>
+                    <div>
+                        <div class="insurer-header-row">
+                            <span class="insurer-badge badge-hdi">Póliza de Crédito</span>
+                            <i class="fa-solid fa-credit-card" style="color: #4ade80; font-size: 1.2rem;"></i>
+                        </div>
+                        <h3 class="insurer-title">Aseguradora HDI</h3>
+                        <div class="insurer-subtitle-target" style="color: #4ade80;">
+                            <i class="fa-solid fa-house-credit"></i> Aplica para: Pólizas de Incendio y Terremoto de Crédito
+                        </div>
+                        
+                        <div class="insurer-steps">
+                            <h5>Pasos para realizar el reporte:</h5>
+                            <ul>
+                                <li>Corresponde a las <strong>Pólizas de Incendio y Terremoto vinculadas a Crédito</strong>.</li>
+                                <li>Realiza tu reclamación en el portal web de <strong>HDI Seguros</strong>.</li>
+                                <li>Al finalizar, la aseguradora te asignará un <strong>Número de Radicado</strong> oficial.</li>
+                                <li><strong>¡Indispensable!</strong> Ingresa ese número de radicado en el formulario de abajo para que el área de <strong>Desarrollo Estratégico</strong> realice el seguimiento con la compañía aseguradora.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="insurer-notice" style="background: rgba(16, 185, 129, 0.15); border-color: rgba(16, 185, 129, 0.3); color: #a7f3d0;">
+                            <i class="fa-solid fa-circle-info"></i> Recordatorio: Tras hacer tu reporte en HDI, registra tu radicado aquí abajo para el seguimiento.
+                        </div>
+                        <button class="insurer-btn btn-hdi" onclick="window.open('https://www.hdi.com.co', '_blank')">
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i> Realizar Reporte en HDI
+                        </button>
+                    </div>
                 </div>
             </div>
 
             <!-- Hero Search -->
             <div class="search-hero">
                 <div class="hero-badge">
-                    <i class="fa-solid fa-shield-heart"></i> Base de Datos Oficial Comfamiliar Risaralda
+                    <i class="fa-solid fa-shield-heart"></i> Consulta de Póliza y Registro de Radicados
                 </div>
-                <h1 class="hero-title">Consulta de Coberturas y Registro de Radicado</h1>
-                <p class="hero-subtitle">Ingresa tu número de cédula para conocer el detalle de tu póliza de bienes y registrar el <strong>Número de Radicado</strong> para seguimiento por parte de Desarrollo Estratégico.</p>
+                <h1 class="hero-title">Consulta tus Bienes y Registra tu Radicado</h1>
+                <p class="hero-subtitle">Ingresa tu Cédula de Ciudadanía para consultar la información de tu póliza de bienes y registrar el <strong>Número de Radicado</strong> asignado por la aseguradora para el seguimiento por Desarrollo Estratégico.</p>
                 
                 <div class="search-box">
                     <input type="text" id="docInput" class="search-input" placeholder="Ingresa tu Cédula de Ciudadanía" onkeypress="handleKeyPress(event)">
@@ -715,10 +823,9 @@
                 </div>
             </div>
 
-            <!-- RESULTADO DE CONSULTA -->
+            <!-- RESULTADO DE CONSULTA CON LOGO EN CERTIFICADO PDF -->
             <div id="resultCard" class="result-card">
                 
-                <!-- Selector si hay múltiples propiedades -->
                 <div id="propSelectorBox" class="prop-selector-box">
                     <label style="font-weight: 700; color: #0369a1; display: block; margin-bottom: 6px;">Selecciona el Inmueble Asegurado:</label>
                     <select id="propSelect" class="form-control" onchange="cambiarPropiedad()"></select>
@@ -726,9 +833,7 @@
 
                 <div id="pdfContent">
                     <div class="brand-pdf-header">
-                        <div class="brand-pdf-logo">
-                            <i class="fa-solid fa-hands-holding-child" style="color: #0284c7;"></i> COMFAMILIAR RISARALDA
-                        </div>
+                        <img src="https://i.imgur.com/yyI6FWO.png" alt="Comfamiliar Risaralda" class="brand-pdf-logo-img">
                         <div style="font-size: 0.85rem; color: #64748b; margin-left: auto; text-align: right;">
                             <strong>Proceso de Desarrollo Estratégico</strong><br>
                             Seguimiento de Siniestros Terremoto / Incendio
@@ -815,7 +920,7 @@
                     </div>
 
                     <p class="radicado-desc">
-                        Una vez hayas realizado el reporte del siniestro directamente ante la aseguradora (<strong>Zurich</strong> o <strong>HDI</strong>), ingresa aquí el número de radicado asignado. Esto nos permitirá realizar la trazabilidad y seguimiento oportuno con la compañía aseguradora.
+                        Una vez hayas realizado el reporte del siniestro directamente ante la aseguradora correspondiente (<strong>Zurich</strong> para empleados o <strong>HDI</strong> para crédito), ingresa aquí el número de radicado asignado. Esto nos permitirá realizar el seguimiento oportuno desde Desarrollo Estratégico con la compañía aseguradora.
                     </p>
 
                     <div class="radicado-form-row">
@@ -828,7 +933,7 @@
                         </div>
                         <div class="form-group">
                             <label>Número de Radicado entregado por la Aseguradora:</label>
-                            <input type="text" id="radNumero" class="form-control" placeholder="Ej: ZUR-2026-987654">
+                            <input type="text" id="radNumero" class="form-control" placeholder="Ej: ZUR-2026-987654 / HDI-123456">
                         </div>
                     </div>
 
@@ -983,7 +1088,6 @@ Por favor ingresa tu número de cédula en el Portal de Autogestión y **registr
     <div id="toast" class="toast">¡Información copiada!</div>
 
     <script>
-        // URL en producción proporcionada por Comfamiliar Risaralda
         const DEFAULT_API_URL = "https://script.google.com/macros/s/AKfycbwm6jhmrEvZCTlg82SdsS2sb-dGIFdVTPOe_hsLSkgCHtndq9HXjeSYfT7zYOIxxAvt/exec";
 
         let customApiUrl = localStorage.getItem('google_sheet_api_url') || DEFAULT_API_URL;
@@ -1017,7 +1121,6 @@ Por favor ingresa tu número de cédula en el Portal de Autogestión y **registr
             return new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0 }).format(num);
         }
 
-        // Normalizador de documentos (quita puntos, espacios y caracteres extra)
         function cleanDocNumber(docStr) {
             if (!docStr) return '';
             return String(docStr).replace(/[^0-9]/g, '').trim();
@@ -1040,10 +1143,9 @@ Por favor ingresa tu número de cédula en el Portal de Autogestión y **registr
                     dataList = await res.json();
                 }
             } catch (err) {
-                console.warn('Error fetching API, checking backup', err);
+                console.warn('Error fetching API', err);
             }
 
-            // Buscar coincidencia normalizando las llaves del JSON de Google Sheets ("Documento", "Documento}", "DOCUMENTO", etc.)
             matchedRecords = dataList.filter(item => {
                 let docVal = item["Documento"] || item["Documento}"] || item["DOCUMENTO"] || item["Cedula"] || item["Cédula"] || "";
                 return cleanDocNumber(docVal) === cleanDoc;
@@ -1052,7 +1154,6 @@ Por favor ingresa tu número de cédula en el Portal de Autogestión y **registr
             const resultCard = document.getElementById('resultCard');
 
             if (matchedRecords.length > 0) {
-                // Configurar selector si hay múltiples registros
                 const selectorBox = document.getElementById('propSelectorBox');
                 const selector = document.getElementById('propSelect');
 
@@ -1114,7 +1215,6 @@ Por favor ingresa tu número de cédula en el Portal de Autogestión y **registr
             document.getElementById('resRce').innerText = formatCurrency(rce);
             document.getElementById('resTotal').innerText = formatCurrency(total);
 
-            // Verificar radicado previo
             const radBox = document.getElementById('radicadoSuccessBox');
             if (record.Radicado_Aseguradora && String(record.Radicado_Aseguradora).trim() !== '') {
                 document.getElementById('lblRadNumero').innerText = `${record.Radicado_Aseguradora} (${record.Aseguradora_Reportada || 'Aseguradora'})`;
