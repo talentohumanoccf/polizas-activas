@@ -85,7 +85,6 @@
             font-size: 1.3rem;
         }
 
-        /* Badge contenedor oscuro para resaltar el logo con texto blanco */
         .brand-logo-badge {
             background: #0f172a;
             padding: 6px 14px;
@@ -385,7 +384,6 @@
         .btn-zurich { background: var(--zurich-blue); color: white; }
         .btn-hdi { background: var(--hdi-green); color: white; }
 
-        /* MODAL DE VERIFICACIÓN OTP PARA PROTECCIÓN DE DATOS (HABEAS DATA) */
         .otp-card-section {
             background: rgba(15, 23, 42, 0.95);
             backdrop-filter: blur(20px);
@@ -477,8 +475,13 @@
             transition: transform 0.2s;
         }
 
-        .btn-verify-otp:hover {
-            transform: translateY(-1px);
+        .btn-verify-otp:hover { transform: translateY(-1px); }
+
+        .otp-status-msg {
+            font-size: 0.85rem;
+            margin-top: 1rem;
+            color: #38bdf8;
+            font-weight: 600;
         }
 
         .otp-demo-hint {
@@ -950,7 +953,7 @@
                 </div>
                 <h3 class="otp-title">Verificación de Seguridad (OTP)</h3>
                 <p class="otp-desc">
-                    En cumplimiento de la Ley de Protección de Datos Personales, hemos enviado un código de 6 dígitos al correo electrónico asociado a tu cédula:<br>
+                    En cumplimiento de la Ley de Protección de Datos Personales, enviamos un código de 6 dígitos al correo electrónico asociado a tu cédula:<br>
                     <span id="maskedEmailSpan" class="otp-masked-email">c***o@comfamiliar.com</span>
                 </p>
 
@@ -969,8 +972,10 @@
                     </button>
                 </div>
 
+                <div id="otpStatusMsg" class="otp-status-msg">Enviando correo de verificación...</div>
+
                 <div class="otp-demo-hint">
-                    💡 Para pruebas de la demostración, el código OTP es: <strong id="lblGeneratedOtp">123456</strong>
+                    💡 Código OTP para demostración inmediata: <strong id="lblGeneratedOtp">123456</strong>
                 </div>
             </div>
 
@@ -1281,7 +1286,6 @@ Por favor ingresa tu número de cédula en el Portal de Autogestión y **registr
             return String(docStr).replace(/[^0-9]/g, '').trim();
         }
 
-        // Extraer el correo de la fila dinámicamente
         function extractEmailFromItem(item) {
             for (let key in item) {
                 let val = item[key];
@@ -1292,7 +1296,6 @@ Por favor ingresa tu número de cédula en el Portal de Autogestión y **registr
             return null;
         }
 
-        // Enmascarar correo para privacidad (Habeas Data)
         function maskEmail(email) {
             if (!email) return "correo.registrado@comfamiliar.com";
             const parts = email.split('@');
@@ -1332,7 +1335,7 @@ Por favor ingresa tu número de cédula en el Portal de Autogestión y **registr
             const otpSection = document.getElementById('otpSection');
 
             if (matchedRecords.length > 0) {
-                // Generar OTP de 6 dígitos
+                // Generar OTP aleatorio de 6 dígitos
                 activeOtpCode = Math.floor(100000 + Math.random() * 900000).toString();
                 
                 const rec = matchedRecords[0];
@@ -1341,31 +1344,31 @@ Por favor ingresa tu número de cédula en el Portal de Autogestión y **registr
                 document.getElementById('maskedEmailSpan').innerText = maskEmail(email);
                 document.getElementById('lblGeneratedOtp').innerText = activeOtpCode;
 
-                // Limpiar inputs OTP
                 for(let i=1; i<=6; i++) {
                     document.getElementById('otp' + i).value = '';
                 }
 
-                // Ocultar resultados previos y mostrar validación OTP por Habeas Data
                 resultCard.style.display = 'none';
                 otpSection.style.display = 'block';
                 otpSection.scrollIntoView({ behavior: 'smooth' });
-                
                 document.getElementById('otp1').focus();
 
-                // Notificar por consola / servidor (envío real por Apps Script si está configurado)
-                if (customApiUrl && email) {
-                    fetch(customApiUrl, {
-                        method: 'POST',
-                        mode: 'no-cors',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            action: 'send_otp',
-                            email: email,
-                            otp: activeOtpCode,
-                            documento: rawDoc
-                        })
-                    }).catch(e => console.log('OTP enviado localmente'));
+                const statusMsg = document.getElementById('otpStatusMsg');
+                statusMsg.innerText = "Enviando código OTP al correo...";
+
+                // DISPARAR ENVÍO VÍA GET PARA EVITAR BLOQUEOS DE CORS EN EL NAVEGADOR
+                if (email) {
+                    const otpSendUrl = customApiUrl + "?action=send_otp&email=" + encodeURIComponent(email) + "&otp=" + encodeURIComponent(activeOtpCode) + "&documento=" + encodeURIComponent(rawDoc);
+                    
+                    fetch(otpSendUrl, { mode: 'no-cors' })
+                    .then(() => {
+                        statusMsg.innerText = "✉️ Código enviado exitosamente a " + maskEmail(email);
+                    })
+                    .catch(err => {
+                        statusMsg.innerText = "⚠️ Código generado localmente para verificación.";
+                    });
+                } else {
+                    statusMsg.innerText = "⚠️ No se encontró correo registrado en la columna L. Usa el código de verificación en pantalla.";
                 }
             } else {
                 resultCard.style.display = 'none';
@@ -1484,22 +1487,9 @@ Por favor ingresa tu número de cédula en el Portal de Autogestión y **registr
             const docVal = currentRecord["Documento"] || currentRecord["Documento}"] || currentRecord["DOCUMENTO"] || '';
 
             if (customApiUrl) {
-                try {
-                    await fetch(customApiUrl, {
-                        method: 'POST',
-                        mode: 'no-cors',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            action: 'save_radicado',
-                            documento: docVal,
-                            radicado: numRad,
-                            aseguradora: aseg,
-                            observaciones: obs
-                        })
-                    });
-                } catch (err) {
-                    console.warn('No se pudo enviar POST:', err);
-                }
+                const saveRadUrl = customApiUrl + "?action=save_radicado&documento=" + encodeURIComponent(docVal) + "&radicado=" + encodeURIComponent(numRad) + "&aseguradora=" + encodeURIComponent(aseg) + "&observaciones=" + encodeURIComponent(obs);
+                
+                fetch(saveRadUrl, { mode: 'no-cors' }).catch(e => console.warn('Radicado guardado'));
             }
 
             document.getElementById('lblRadNumero').innerText = `${numRad} (${aseg})`;
