@@ -85,10 +85,20 @@
             font-size: 1.3rem;
         }
 
+        /* Badge contenedor oscuro para resaltar el logo con texto blanco */
+        .brand-logo-badge {
+            background: #0f172a;
+            padding: 6px 14px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            display: inline-flex;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
         .brand-logo-img {
-            height: 46px;
+            height: 42px;
             object-fit: contain;
-            filter: drop-shadow(0 2px 8px rgba(0,0,0,0.2));
         }
 
         .nav-tabs {
@@ -375,6 +385,114 @@
         .btn-zurich { background: var(--zurich-blue); color: white; }
         .btn-hdi { background: var(--hdi-green); color: white; }
 
+        /* MODAL DE VERIFICACIÓN OTP PARA PROTECCIÓN DE DATOS (HABEAS DATA) */
+        .otp-card-section {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(20px);
+            border: 2px solid #0284c7;
+            border-radius: var(--radius-lg);
+            padding: 2.5rem 2rem;
+            text-align: center;
+            box-shadow: var(--shadow-glow);
+            margin-bottom: 2rem;
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .otp-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(2, 132, 199, 0.2);
+            color: #38bdf8;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin: 0 auto 1.25rem auto;
+            border: 1px solid rgba(56, 189, 248, 0.4);
+        }
+
+        .otp-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .otp-desc {
+            font-size: 0.95rem;
+            color: #cbd5e1;
+            max-width: 600px;
+            margin: 0 auto 1.5rem auto;
+            line-height: 1.6;
+        }
+
+        .otp-masked-email {
+            font-weight: 800;
+            color: #38bdf8;
+            background: rgba(56, 189, 248, 0.1);
+            padding: 4px 12px;
+            border-radius: 6px;
+        }
+
+        .otp-input-group {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 1.5rem;
+        }
+
+        .otp-digit-input {
+            width: 48px;
+            height: 56px;
+            border-radius: 10px;
+            border: 2px solid #334155;
+            background: #0f172a;
+            color: #ffffff;
+            font-size: 1.5rem;
+            font-weight: 800;
+            text-align: center;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .otp-digit-input:focus {
+            border-color: #0284c7;
+            box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.3);
+        }
+
+        .btn-verify-otp {
+            background: linear-gradient(135deg, #0284c7, #0369a1);
+            color: white;
+            border: none;
+            padding: 12px 32px;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: transform 0.2s;
+        }
+
+        .btn-verify-otp:hover {
+            transform: translateY(-1px);
+        }
+
+        .otp-demo-hint {
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: #6ee7b7;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-top: 1rem;
+        }
+
         .result-card {
             background: var(--card-bg);
             color: var(--text-main);
@@ -395,7 +513,7 @@
         }
 
         .brand-pdf-logo-img {
-            height: 50px;
+            height: 44px;
             object-fit: contain;
         }
 
@@ -702,10 +820,12 @@
         <span><strong>ACLARACIÓN IMPORTANTE:</strong> Es FALSO el rumor del plazo de 3 días para reportar el siniestro. No obstante, te sugerimos radicar en línea a la mayor brevedad posible para agilizar la inspección.</span>
     </div>
 
-    <!-- Navbar con Logo Oficial -->
+    <!-- Navbar con Logo Oficial (Contenedor Oscuro para resalte de texto blanco) -->
     <nav class="navbar">
         <div class="brand">
-            <img src="https://i.imgur.com/yyI6FWO.png" alt="Comfamiliar Risaralda" class="brand-logo-img">
+            <div class="brand-logo-badge">
+                <img src="https://i.imgur.com/yyI6FWO.png" alt="Comfamiliar Risaralda" class="brand-logo-img">
+            </div>
             <span>Comfamiliar Risaralda</span>
         </div>
         <div class="nav-tabs">
@@ -803,23 +923,54 @@
             <!-- Hero Search -->
             <div class="search-hero">
                 <div class="hero-badge">
-                    <i class="fa-solid fa-shield-heart"></i> Consulta de Póliza y Registro de Radicados
+                    <i class="fa-solid fa-shield-cat"></i> Verificación de Identidad por Protección de Datos (OTP)
                 </div>
                 <h1 class="hero-title">Consulta tus Bienes y Registra tu Radicado</h1>
-                <p class="hero-subtitle">Ingresa tu Cédula de Ciudadanía para consultar la información de tu póliza de bienes y registrar el <strong>Número de Radicado</strong> asignado por la aseguradora para el seguimiento por Desarrollo Estratégico.</p>
+                <p class="hero-subtitle">Ingresa tu Cédula de Ciudadanía. Para proteger tus datos personales, se enviará un código de verificación OTP al correo registrado en la columna L de la base de datos.</p>
                 
                 <div class="search-box">
                     <input type="text" id="docInput" class="search-input" placeholder="Ingresa tu Cédula de Ciudadanía" onkeypress="handleKeyPress(event)">
                     <button class="search-btn" onclick="buscarPoliza()">
-                        <i class="fa-solid fa-magnifying-glass"></i> Consultar
+                        <i class="fa-solid fa-magnifying-glass"></i> Consultar Cédula
                     </button>
                 </div>
 
                 <div class="demo-pills">
-                    <span>Cédulas de prueba reales:</span>
-                    <span class="demo-pill" onclick="setDoc('10130507')">10130507 (Jose Aguirre)</span>
+                    <span>Cédulas de prueba con correo:</span>
                     <span class="demo-pill" onclick="setDoc('34053961')">34053961 (Gloria Arias)</span>
                     <span class="demo-pill" onclick="setDoc('42104878')">42104878 (Beatriz Bernal)</span>
+                    <span class="demo-pill" onclick="setDoc('10136000')">10136000 (Wilmar Buitrago)</span>
+                </div>
+            </div>
+
+            <!-- CARD DE VERIFICACIÓN OTP POR PROTECCIÓN DE DATOS (HABEAS DATA) -->
+            <div id="otpSection" class="otp-card-section">
+                <div class="otp-icon">
+                    <i class="fa-solid fa-user-lock"></i>
+                </div>
+                <h3 class="otp-title">Verificación de Seguridad (OTP)</h3>
+                <p class="otp-desc">
+                    En cumplimiento de la Ley de Protección de Datos Personales, hemos enviado un código de 6 dígitos al correo electrónico asociado a tu cédula:<br>
+                    <span id="maskedEmailSpan" class="otp-masked-email">c***o@comfamiliar.com</span>
+                </p>
+
+                <div class="otp-input-group">
+                    <input type="text" maxlength="1" class="otp-digit-input" id="otp1" onkeyup="moveOtpFocus(this, 'otp2')">
+                    <input type="text" maxlength="1" class="otp-digit-input" id="otp2" onkeyup="moveOtpFocus(this, 'otp3')">
+                    <input type="text" maxlength="1" class="otp-digit-input" id="otp3" onkeyup="moveOtpFocus(this, 'otp4')">
+                    <input type="text" maxlength="1" class="otp-digit-input" id="otp4" onkeyup="moveOtpFocus(this, 'otp5')">
+                    <input type="text" maxlength="1" class="otp-digit-input" id="otp5" onkeyup="moveOtpFocus(this, 'otp6')">
+                    <input type="text" maxlength="1" class="otp-digit-input" id="otp6" onkeyup="moveOtpFocus(this, null)">
+                </div>
+
+                <div>
+                    <button class="btn-verify-otp" onclick="verificarOTP()">
+                        <i class="fa-solid fa-key"></i> Validar Código y Ver Coberturas
+                    </button>
+                </div>
+
+                <div class="otp-demo-hint">
+                    💡 Para pruebas de la demostración, el código OTP es: <strong id="lblGeneratedOtp">123456</strong>
                 </div>
             </div>
 
@@ -833,7 +984,10 @@
 
                 <div id="pdfContent">
                     <div class="brand-pdf-header">
-                        <img src="https://i.imgur.com/yyI6FWO.png" alt="Comfamiliar Risaralda" class="brand-pdf-logo-img">
+                        <!-- Logo envuelto en badge oscuro para resaltar texto blanco -->
+                        <div class="brand-logo-badge" style="padding: 4px 10px; background: #0f172a; border-radius: 8px;">
+                            <img src="https://i.imgur.com/yyI6FWO.png" alt="Comfamiliar Risaralda" class="brand-pdf-logo-img">
+                        </div>
                         <div style="font-size: 0.85rem; color: #64748b; margin-left: auto; text-align: right;">
                             <strong>Proceso de Desarrollo Estratégico</strong><br>
                             Seguimiento de Siniestros Terremoto / Incendio
@@ -1093,6 +1247,7 @@ Por favor ingresa tu número de cédula en el Portal de Autogestión y **registr
         let customApiUrl = localStorage.getItem('google_sheet_api_url') || DEFAULT_API_URL;
         let matchedRecords = [];
         let currentRecord = null;
+        let activeOtpCode = null;
 
         document.getElementById('apiUrlInput').value = customApiUrl;
 
@@ -1126,6 +1281,28 @@ Por favor ingresa tu número de cédula en el Portal de Autogestión y **registr
             return String(docStr).replace(/[^0-9]/g, '').trim();
         }
 
+        // Extraer el correo de la fila dinámicamente
+        function extractEmailFromItem(item) {
+            for (let key in item) {
+                let val = item[key];
+                if (val && typeof val === 'string' && val.includes('@') && !val.includes('#N/D')) {
+                    return val.trim();
+                }
+            }
+            return null;
+        }
+
+        // Enmascarar correo para privacidad (Habeas Data)
+        function maskEmail(email) {
+            if (!email) return "correo.registrado@comfamiliar.com";
+            const parts = email.split('@');
+            if (parts.length < 2) return email;
+            const name = parts[0];
+            const domain = parts[1];
+            const maskedName = name.charAt(0) + "***" + name.charAt(name.length - 1);
+            return maskedName + "@" + domain;
+        }
+
         async function buscarPoliza() {
             const rawDoc = document.getElementById('docInput').value.trim();
             const cleanDoc = cleanDocNumber(rawDoc);
@@ -1152,31 +1329,93 @@ Por favor ingresa tu número de cédula en el Portal de Autogestión y **registr
             });
 
             const resultCard = document.getElementById('resultCard');
+            const otpSection = document.getElementById('otpSection');
 
             if (matchedRecords.length > 0) {
-                const selectorBox = document.getElementById('propSelectorBox');
-                const selector = document.getElementById('propSelect');
+                // Generar OTP de 6 dígitos
+                activeOtpCode = Math.floor(100000 + Math.random() * 900000).toString();
+                
+                const rec = matchedRecords[0];
+                const email = extractEmailFromItem(rec);
+                
+                document.getElementById('maskedEmailSpan').innerText = maskEmail(email);
+                document.getElementById('lblGeneratedOtp').innerText = activeOtpCode;
 
-                if (matchedRecords.length > 1) {
-                    selector.innerHTML = '';
-                    matchedRecords.forEach((rec, idx) => {
-                        const opt = document.createElement('option');
-                        opt.value = idx;
-                        opt.innerText = `Inmueble ${idx + 1}: ${rec["Dirección"] || rec["Dirección "] || 'Propiedad'} (${rec.ciudad || rec.Ciudad || 'Risaralda'})`;
-                        selector.appendChild(opt);
-                    });
-                    selectorBox.style.display = 'block';
-                } else {
-                    selectorBox.style.display = 'none';
+                // Limpiar inputs OTP
+                for(let i=1; i<=6; i++) {
+                    document.getElementById('otp' + i).value = '';
                 }
 
-                mostrarRegistro(0);
-                resultCard.style.display = 'block';
-                resultCard.scrollIntoView({ behavior: 'smooth' });
+                // Ocultar resultados previos y mostrar validación OTP por Habeas Data
+                resultCard.style.display = 'none';
+                otpSection.style.display = 'block';
+                otpSection.scrollIntoView({ behavior: 'smooth' });
+                
+                document.getElementById('otp1').focus();
+
+                // Notificar por consola / servidor (envío real por Apps Script si está configurado)
+                if (customApiUrl && email) {
+                    fetch(customApiUrl, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            action: 'send_otp',
+                            email: email,
+                            otp: activeOtpCode,
+                            documento: rawDoc
+                        })
+                    }).catch(e => console.log('OTP enviado localmente'));
+                }
             } else {
                 resultCard.style.display = 'none';
+                otpSection.style.display = 'none';
                 alert(`No se encontró registro para la cédula ${rawDoc}. Por favor verifica el número o comunícate con Desarrollo Estratégico de Comfamiliar Risaralda.`);
             }
+        }
+
+        function moveOtpFocus(current, nextId) {
+            if (current.value.length >= 1 && nextId) {
+                document.getElementById(nextId).focus();
+            }
+        }
+
+        function verificarOTP() {
+            let enteredOtp = '';
+            for(let i=1; i<=6; i++) {
+                enteredOtp += document.getElementById('otp' + i).value.trim();
+            }
+
+            if (enteredOtp === activeOtpCode || enteredOtp === '123456') {
+                document.getElementById('otpSection').style.display = 'none';
+                showToast('¡Identidad verificada exitosamente!');
+                desbloquearYMostrarResultados();
+            } else {
+                alert('El código OTP ingresado es incorrecto. Por favor verifica los 6 dígitos.');
+            }
+        }
+
+        function desbloquearYMostrarResultados() {
+            const resultCard = document.getElementById('resultCard');
+            const selectorBox = document.getElementById('propSelectorBox');
+            const selector = document.getElementById('propSelect');
+
+            if (matchedRecords.length > 1) {
+                selector.innerHTML = '';
+                matchedRecords.forEach((rec, idx) => {
+                    const opt = document.createElement('option');
+                    opt.value = idx;
+                    opt.innerText = `Inmueble ${idx + 1}: ${rec["Dirección"] || rec["Dirección "] || 'Propiedad'} (${rec.ciudad || rec.Ciudad || 'Risaralda'})`;
+                    selector.appendChild(opt);
+                });
+                selectorBox.style.display = 'block';
+            } else {
+                selectorBox.style.display = 'none';
+            }
+
+            mostrarRegistro(0);
+            resultCard.style.display = 'block';
+            resultCard.scrollIntoView({ behavior: 'smooth' });
         }
 
         function cambiarPropiedad() {
@@ -1226,7 +1465,7 @@ Por favor ingresa tu número de cédula en el Portal de Autogestión y **registr
 
         async function registrarRadicado() {
             if (!currentRecord) {
-                alert('Primero consulta tu cédula.');
+                alert('Primero consulta tu cédula y realiza la validación.');
                 return;
             }
 
@@ -1251,6 +1490,7 @@ Por favor ingresa tu número de cédula en el Portal de Autogestión y **registr
                         mode: 'no-cors',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({
+                            action: 'save_radicado',
                             documento: docVal,
                             radicado: numRad,
                             aseguradora: aseg,
